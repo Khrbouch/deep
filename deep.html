@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Birthday Cake Party</title>
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top, #fff0f5 0%, #ffb6c1 100%);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .birthday-text {
+      font-size: 2.8rem;
+      font-weight: bold;
+      color: #d63384;
+      margin-bottom: 40px;
+      text-shadow: 2px 2px #fff;
+      animation: fadeInUp 1s ease-out forwards;
+      z-index: 10;
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cake */
+    .cake {
+      position: relative;
+      width: 180px;
+      height: 200px;
+      z-index: 10;
+    }
+
+    .tier {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 50% / 20%;
+    }
+
+    .tier1 { width: 180px; height: 60px; background: #ff8fab; bottom: 0; }
+    .tier2 { width: 130px; height: 50px; background: #ff99c8; bottom: 55px; }
+    .tier3 { width: 80px; height: 40px; background: #ffb3d1; bottom: 105px; }
+
+    .icing {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 20px;
+      background: white;
+      border-radius: 50% / 100%;
+      z-index: 2;
+    }
+
+    .drip {
+      position: absolute;
+      width: 14px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      bottom: -10px;
+      animation: dripAnim 2s infinite ease-in-out alternate;
+    }
+
+    .drip:nth-child(2) { left: 20%; animation-delay: 0.2s; }
+    .drip:nth-child(3) { left: 40%; animation-delay: 0.4s; }
+    .drip:nth-child(4) { left: 60%; animation-delay: 0.6s; }
+    .drip:nth-child(5) { left: 80%; animation-delay: 0.8s; }
+
+    @keyframes dripAnim {
+      0% { transform: scaleY(1); }
+      100% { transform: scaleY(1.3); }
+    }
+
+    .candle {
+      position: absolute;
+      width: 10px;
+      height: 40px;
+      background: #fff176;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 4px;
+      z-index: 5;
+    }
+
+    .flame {
+      position: absolute;
+      width: 14px;
+      height: 20px;
+      background: radial-gradient(circle, #ff0 30%, #f90 70%);
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-45deg);
+      border-radius: 50% 60% 50% 50%;
+      animation: flame-flicker 0.4s infinite alternate;
+      box-shadow: 0 0 20px rgba(255, 105, 0, 0.6);
+    }
+
+    @keyframes flame-flicker {
+      0% { transform: translateX(-50%) scale(1); opacity: 1; }
+      100% { transform: translateX(-50%) scale(1.1); opacity: 0.8; }
+    }
+
+    /* Balloons */
+    .balloon {
+      position: absolute;
+      width: 40px;
+      height: 55px;
+      border-radius: 50% 50% 50% 50%;
+      background: red;
+      animation: float 6s ease-in-out infinite;
+      box-shadow: inset -4px -8px rgba(0,0,0,0.1);
+    }
+
+    .balloon:after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      height: 30px;
+      background: #555;
+      left: 50%;
+      top: 100%;
+      transform: translateX(-50%);
+    }
+
+    .balloon:nth-child(1) { left: 10%; background: #ff6b6b; animation-delay: 0s; }
+    .balloon:nth-child(2) { left: 20%; background: #6bc2ff; animation-delay: 1s; }
+    .balloon:nth-child(3) { left: 30%; background: #ffc93c; animation-delay: 2s; }
+    .balloon:nth-child(4) { left: 70%; background: #b983ff; animation-delay: 1.5s; }
+    .balloon:nth-child(5) { left: 85%; background: #00d2d3; animation-delay: 0.5s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-30px); }
+    }
+
+    /* Fireworks */
+    .firework {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: gold;
+      animation: explode 1s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0.2); opacity: 1; }
+      100% { transform: scale(3); opacity: 0; }
+    }
+
+    /* Stars */
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #fff;
+      border-radius: 50%;
+      animation: floatStar 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatStar {
+      from { transform: translateY(100vh); opacity: 1; }
+      to { transform: translateY(-20vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="birthday-text">🎉 Happy 20th Birthday,LOUBNA! 🎂</div>
+
+  <!-- Balloons -->
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+
+  <!-- Cake -->
+  <div class="cake">
+    <div class="tier tier1">
+      <div class="icing">
+        <div class="drip"></div><div class="drip"></div><div class="drip"></div><div class="drip"></div><div class="drip"></div>
+      </div>
+    </div>
+    <div class="tier tier2">
+      <div class="icing">
+        <div class="drip"></div><div class="drip"></div><div class="drip"></div><div class="drip"></div>
+      </div>
+    </div>
+    <div class="tier tier3">
+      <div class="icing">
+        <div class="drip"></div><div class="drip"></div><div class="drip"></div>
+      </div>
+      <div class="candle"><div class="flame"></div></div>
+    </div>
+  </div>
+
+  <!-- Stars -->
+  <div class="stars" id="stars"></div>
+
+  <script>
+    // Generate floating stars
+    function createStars() {
+      const container = document.getElementById('stars');
+      for (let i = 0; i < 40; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.animationDuration = `${Math.random() * 3 + 3}s`;
+        container.appendChild(star);
+      }
+    }
+
+    // Launch fireworks
+    function launchFirework() {
+      const firework = document.createElement('div');
+      firework.classList.add('firework');
+      firework.style.left = `${Math.random() * 100}%`;
+      firework.style.top = `${Math.random() * 60 + 10}%`;
+      firework.style.background = ['gold', 'red', 'blue', 'cyan', 'pink'][Math.floor(Math.random() * 5)];
+      document.body.appendChild(firework);
+      setTimeout(() => firework.remove(), 1000);
+    }
+
+    // Trigger fireworks repeatedly
+    setInterval(launchFirework, 800);
+    window.onload = createStars;
+  </script>
+</body>
+</html>
